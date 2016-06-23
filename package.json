@@ -37,9 +37,5 @@
     }
   },
   "repository": "oc-elements/generator-polymer-init-oc-app",
-  "scripts": {
-    "prepublish": "gulp prepublish",
-    "test": "gulp"
-  },
   "license": "MIT"
 }
