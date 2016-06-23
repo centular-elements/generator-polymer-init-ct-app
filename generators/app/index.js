@@ -64,18 +64,8 @@ module.exports = yeoman.Base.extend({
   },
 
   install: function () {
-    return new Promise((resolve) => {
-      this.log(chalk.bold('\nProject generated!\n'));
-      this.prompt({
-        type: 'confirm',
-        name: 'installDeps',
-        message: 'Install bower dependencies now?',
-        default: true
-      }, (props) => {
-        if (props.installDeps) this.bowerInstall();
-        resolve();
-      });
-    });
+    this.log(chalk.bold('\nProject generated!\n'));
+    this.log(chalk.yellow('Run ') + 'bower install' + chalk.yellow(' now to install dependencies'));
   },
 
   _validateAppName: function(name) {
