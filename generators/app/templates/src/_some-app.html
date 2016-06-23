@@ -1,0 +1,135 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+<link rel="import" href="<%= appHandle %>-icons.html">
+<link rel="import" href="../bower_components/oc-core-utils/oc-app-styles.html">
+<link rel="import" href="../bower_components/oc-app-behaviour/oc-app-behaviour.html">
+<link rel="import" href="../bower_components/oc-organisation-picker/oc-organisation-picker.html">
+<link rel="import" href="../bower_components/oc-signin/oc-signin.html">
+
+<dom-module id="<%= appName %>">
+
+  <template>
+    <style include="oc-app-styles">
+      :host {
+        display: block;
+      }
+      :host(:not([page=view])) .back-btn {
+        display: none;
+      }
+      #toast[drawer-opened] {
+        margin-left: 270px;
+      }
+      app-drawer app-toolbar iron-icon {
+        --iron-icon-height: 46px;
+        --iron-icon-width: 46px;
+        margin-right: 0.6em;
+      }
+    </style>
+
+    <app-location route="{{ route }}"></app-location>
+    <app-route
+        route="{{ route }}"
+        pattern="/:page"
+        data="{{ routeData }}"
+        tail="{{ subroute }}"
+    ></app-route>
+
+    <app-drawer-layout fullbleed>
+
+      <!-- Drawer content -->
+      <app-drawer id="drawer" opened="{{ drawerOpened }}" swipe-open>
+        <app-toolbar>
+          <iron-icon src="/images/app-icon-128.png"></iron-icon>
+          Organisations
+        </app-toolbar>
+        <iron-selector selected="[[ page ]]" attr-for-selected="name" class="drawer-list" role="navigation">
+          <template is="dom-repeat" items="[[ _computeMenuItems(signedIn) ]]">
+            <a name="[[ item.name ]]" href="[[ item.menuItem.href ]]" on-tap="_closeDrawer">
+              <iron-icon icon="[[ item.menuItem.icon ]]"></iron-icon>
+              <span>[[ item.menuItem.name ]]</span>
+            </a>
+          </template>
+        </iron-selector>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region>
+
+        <app-header condenses reveals effects="waterfall">
+          <app-toolbar>
+            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+            <paper-icon-button icon="arrow-back" aria-label="Go back" class="back-btn" on-tap="_navigateBack"></paper-icon-button>
+            <div title>[[ _getPageTitle(page) ]]</div>
+            <oc-organisation-picker
+                hidden$="[[ !signedIn ]]"
+                permission="[[ _computePermission(signedIn) ]]"
+                selected-organisation="{{ selectedOrganisation }}"
+                client-id="{{ clientId }}"
+            ></oc-organisation-picker>
+            <paper-icon-button
+                id="refreshBtn"
+                icon="autorenew"
+                aria-label="Refresh"
+                class$="[[ _computeRefreshBtnClass(refreshing) ]]"
+                disabled$="[[ refreshing ]]"
+                on-tap="_refresh"
+                hidden
+            ></paper-icon-button>
+            <oc-signin user="{{ user }}" signed-in="{{ signedIn }}"></oc-signin>
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages role="main" selected="[[ page ]]" attr-for-selected="name" selected-attribute="active" selected-item="{{ activeView }}">
+          <orders-signin name="signin"></orders-signin>
+        </iron-pages>
+
+        <paper-toast id="toast" drawer-opened$="[[ drawerOpened ]]"></paper-toast>
+
+      </app-header-layout>
+
+    </app-drawer-layout>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: '<%= appName %>',
+      behaviors: [OC.Behaviours.App],
+
+      get pages() {
+        return [
+          OC.Page('signin', 'Sign in'),
+          // OC.Page('pageName', 'Page Title', OC.PageMenuItem('Display Name', '/uri', 'icon')),
+        ];
+      },
+
+      get appHandle() {
+        return '<%= appHandle %>';
+      }
+
+    });
+
+  </script>
+
+</dom-module>
