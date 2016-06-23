@@ -3,7 +3,8 @@
   "version": "0.1.1",
   "description": "A generator that generates an app shell for creating Ordercloud apps",
   "files": [
-    "generators/app"
+    "generators/app",
+    "generators/page"
   ],
   "main": "generators\\index.js",
   "keywords": [
