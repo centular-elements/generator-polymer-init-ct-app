@@ -37,8 +37,13 @@ module.exports = yeoman.Base.extend({
 
   writing: function () {
     this.fs.copyTpl(
-      [this.templatePath('**/*'), '!**/_*'],
+      [this.templatePath('**/*'), '!**/_*', '!images'],
       this.destinationPath(),
+      this.preferences
+    );
+    this.fs.copy(
+      this.templatePath('images/**'),
+      this.destinationPath('images'),
       this.preferences
     );
     this.fs.copyTpl(
