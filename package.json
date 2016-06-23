@@ -1,7 +1,7 @@
 {
   "name": "generator-polymer-init-oc-app",
   "version": "0.1.1",
-  "description": "An app shell for creating Ordercloud apps",
+  "description": "A generator that generates an app shell for creating Ordercloud apps",
   "files": [
     "generators/app"
   ],
