@@ -61,7 +61,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" opened="{{ drawerOpened }}" swipe-open>
         <app-toolbar>
           <iron-icon src="/images/app-icon-128.png"></iron-icon>
-          Organisations
+          <%= appShortTitle %>
         </app-toolbar>
         <iron-selector selected="[[ page ]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <template is="dom-repeat" items="[[ _computeMenuItems(signedIn) ]]">
@@ -101,7 +101,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header>
 
         <iron-pages role="main" selected="[[ page ]]" attr-for-selected="name" selected-attribute="active" selected-item="{{ activeView }}">
-          <orders-signin name="signin"></orders-signin>
+          <<%= appHandle %>-signin name="signin"></<%= appHandle %>-signin>
         </iron-pages>
 
         <paper-toast id="toast" drawer-opened$="[[ drawerOpened ]]"></paper-toast>
@@ -120,7 +120,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       get pages() {
         return [
           OC.Page('signin', 'Sign in'),
-          // OC.Page('pageName', 'Page Title', OC.PageMenuItem('Display Name', '/uri', 'icon')),
         ];
       },
 
