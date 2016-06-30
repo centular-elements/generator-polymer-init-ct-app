@@ -65,7 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header condenses reveals effects="waterfall">
+        <app-header condenses fixed shadow>
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <paper-icon-button icon="arrow-back" aria-label="Go back" class="back-btn" on-tap="_navigateBack"></paper-icon-button>
@@ -114,6 +114,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       get appHandle() {
         return '<%= appHandle %>';
+      },
+
+      get defaultPage() {
+        return this.pages[0];
+      },
+
+      get refreshablePages() {
+        return [];
       }
 
     });

@@ -21,8 +21,5 @@
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
-  },
-  "resolutions": {
-    "oc-core-utils": "1.x"
   }
 }
