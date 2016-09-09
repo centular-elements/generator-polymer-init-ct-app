@@ -69,7 +69,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <paper-icon-button icon="arrow-back" aria-label="Go back" class="back-btn" on-tap="_navigateBack"></paper-icon-button>
-            <div title>[[ _getPageTitle(page) ]]</div>
+            <div main-title>[[ _getPageTitle(page) ]]</div>
             <oc-organisation-picker
                 hidden$="[[ !signedIn ]]"
                 permission="[[ _computePermission(signedIn) ]]"
