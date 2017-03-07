@@ -7,7 +7,7 @@ var yeoman = require('yeoman-generator'),
 module.exports = yeoman.Base.extend({
   prompting: function () {
     this.log(yosay(
-      'Welcome to the ' + chalk.blue('Ordercloud app shell') + ' generator!'
+      'Welcome to the ' + chalk.blue('Centular app shell') + ' generator!'
     ));
 
     var prompts = [{

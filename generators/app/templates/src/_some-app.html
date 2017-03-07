@@ -22,15 +22,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="<%= appHandle %>-icons.html">
-<link rel="import" href="../bower_components/oc-core-utils/oc-app-styles.html">
-<link rel="import" href="../bower_components/oc-app-behaviour/oc-app-behaviour.html">
-<link rel="import" href="../bower_components/oc-organisation-picker/oc-organisation-picker.html">
-<link rel="import" href="../bower_components/oc-signin/oc-signin.html">
+<link rel="import" href="../bower_components/ct-core-utils/ct-app-styles.html">
+<link rel="import" href="../bower_components/ct-app-behaviour/ct-app-behaviour.html">
+<link rel="import" href="../bower_components/ct-sign-in-button/ct-sign-in-button.html">
 
 <dom-module id="<%= appName %>">
 
   <template>
-    <style include="oc-app-styles">
+    <style include="ct-app-styles">
       :host {
         display: block;
       }
@@ -70,12 +69,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <paper-icon-button icon="arrow-back" aria-label="Go back" class="back-btn" on-tap="_navigateBack"></paper-icon-button>
             <div main-title>[[ _getPageTitle(page) ]]</div>
-            <oc-organisation-picker
-                hidden$="[[ !signedIn ]]"
-                permission="[[ _computePermission(signedIn) ]]"
-                selected-organisation="{{ selectedOrganisation }}"
-                client-id="{{ clientId }}"
-            ></oc-organisation-picker>
             <paper-icon-button
                 id="refreshBtn"
                 icon="autorenew"
@@ -85,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 on-tap="_refresh"
                 hidden
             ></paper-icon-button>
-            <oc-signin user="{{ user }}" signed-in="{{ signedIn }}"></oc-signin>
+            <ct-sign-in-button user="{{ user }}" signed-in="{{ signedIn }}"></ct-sign-in-button>
           </app-toolbar>
         </app-header>
 
@@ -104,11 +97,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     Polymer({
       is: '<%= appName %>',
-      behaviors: [OC.Behaviours.App],
+      behaviors: [CT.Behaviours.App],
 
       get pages() {
         return [
-          OC.Page('signin', 'Sign in'),
+          CT.Page('signin', 'Sign in'),
         ];
       },
 

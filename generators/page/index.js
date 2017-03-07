@@ -11,7 +11,7 @@ module.exports = yeoman.Base.extend({
 
   prompting: function () {
     this.log(yosay(
-      'Welcome to the ' + chalk.blue('Ordercloud app page') + ' generator!'
+      'Welcome to the ' + chalk.blue('Centular app page') + ' generator!'
     ));
 
     var prompts = [{
@@ -88,7 +88,7 @@ module.exports = yeoman.Base.extend({
     // Add page config
     let menuItem = '';
     if (this.preferences.hasMenuItem) {
-      menuItem = `, OC.PageMenuItem('${this.preferences.menuTitle}', '/${this.preferences.pageName}', '${this.preferences.menuIcon}')`;
+      menuItem = `, CT.PageMenuItem('${this.preferences.menuTitle}', '/${this.preferences.pageName}', '${this.preferences.menuIcon}')`;
     }
     startOfPages = updatedAppElement.indexOf('get pages()');
     endOfPages = updatedAppElement.indexOf('];', startOfPages);
@@ -96,7 +96,7 @@ module.exports = yeoman.Base.extend({
     appElementBottomHalf = updatedAppElement.slice(endOfPages);
     updatedAppElement = [
       appElementTopHalf,
-      `  OC.Page('${this.preferences.pageName}', '${this.preferences.pageTitle}'${menuItem}),`,
+      `  CT.Page('${this.preferences.pageName}', '${this.preferences.pageTitle}'${menuItem}),`,
       '\n        ', appElementBottomHalf
     ].join('');
 

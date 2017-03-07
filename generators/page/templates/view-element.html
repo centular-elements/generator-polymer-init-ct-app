@@ -1,12 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/oc-core-utils/oc-app-styles.html">
-<link rel="import" href="../../bower_components/oc-core-utils/oc-api-consumer-behaviour.html">
+<link rel="import" href="../../bower_components/ct-core-utils/ct-app-styles.html">
+<link rel="import" href="../../bower_components/ct-core-utils/ct-api-consumer-behaviour.html">
 
 <dom-module id="<%= elementName %>">
 
   <template>
-    <style include="oc-app-styles">
+    <style include="ct-app-styles">
       :host {
         display: block;
         padding: 10px;
@@ -21,7 +21,7 @@
   <script>
     Polymer({
       is: '<%= elementName %>',
-      behaviors: [OC.Behaviours.ApiConsumer],
+      behaviors: [CT.Behaviours.ApiConsumer],
 
       // Element logic here
 
