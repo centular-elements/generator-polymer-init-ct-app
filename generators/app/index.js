@@ -57,8 +57,8 @@ module.exports = yeoman.Base.extend({
       this.preferences
     );
     this.fs.copyTpl(
-      this.templatePath('src/views/_some-signin.html'),
-      this.destinationPath(`src/views/${this.preferences.appHandle}-signin.html`),
+      this.templatePath('src/views/_some-home.html'),
+      this.destinationPath(`src/views/${this.preferences.appHandle}-home.html`),
       this.preferences
     );
   },

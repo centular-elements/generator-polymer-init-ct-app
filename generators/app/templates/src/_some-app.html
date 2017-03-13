@@ -43,12 +43,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{ subroute }}"
     ></app-route>
 
-    <app-drawer-layout fullbleed>
+    <app-drawer-layout fullbleed responsive-width="1024px">
 
       <!-- Drawer content -->
       <app-drawer id="drawer" opened="{{ drawerOpened }}" swipe-open>
         <app-toolbar>
-          <iron-icon src="/images/app-icon-128.png"></iron-icon>
+          <!--<iron-icon src="/images/app-icon-128.png"></iron-icon>-->
           <%= appShortTitle %>
         </app-toolbar>
         <iron-selector selected="[[ page ]]" attr-for-selected="name" class="drawer-list" role="navigation">
@@ -78,12 +78,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 on-tap="_refresh"
                 hidden
             ></paper-icon-button>
-            <ct-sign-in-button user="{{ user }}" signed-in="{{ signedIn }}"></ct-sign-in-button>
+            <ct-sign-in-button
+              client-id="your client id here"
+              token-redirect-uri="[[ _getTokenRedirectUri() ]]"
+              auth-host-url="[[ _authHostUrl ]]"
+              api-host-url="[[ _apiHostUrl ]]"
+              default-profile-pic="/images/default-profile-pic.jpg"
+              after-sign-out-url="[[ _getHomePage() ]]"
+            ></ct-sign-in-button>
           </app-toolbar>
         </app-header>
 
         <iron-pages role="main" selected="[[ page ]]" attr-for-selected="name" selected-attribute="active" selected-item="{{ activeView }}">
-          <<%= appHandle %>-signin name="signin"></<%= appHandle %>-signin>
+          <<%= appHandle %>-home name="home"></<%= appHandle %>-home>
         </iron-pages>
 
         <paper-toast id="toast" drawer-opened$="[[ drawerOpened ]]"></paper-toast>
@@ -101,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       get pages() {
         return [
-          CT.Page('signin', 'Sign in'),
+          CT.Page('home', 'Home'),
         ];
       },
 
@@ -116,7 +123,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       get refreshablePages() {
         return [];
       }
-
     });
 
   </script>
