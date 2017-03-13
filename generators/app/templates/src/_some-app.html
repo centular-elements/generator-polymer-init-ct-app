@@ -18,6 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
@@ -35,12 +36,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
+    <iron-ajax auto url="/appconfig.json" handle-as="json" last-response="{{_appconfig}}"></iron-ajax>
+
     <app-location route="{{ route }}"></app-location>
     <app-route
         route="{{ route }}"
         pattern="/:page"
         data="{{ routeData }}"
-        tail="{{ subroute }}"
+        tail="{{ subRoute }}"
     ></app-route>
 
     <app-drawer-layout fullbleed responsive-width="1024px">
@@ -105,6 +108,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: '<%= appName %>',
       behaviors: [CT.Behaviours.App],
+
+      observers: [
+        '_configLoaded(_appconfig)'
+      ],
+
+      _configLoaded: function(appconfig) {
+        this._authHostUrl = appconfig.auth;
+        this._apiHostUrl = appconfig.api;
+      },
 
       get pages() {
         return [
