@@ -56,11 +56,6 @@ module.exports = yeoman.Base.extend({
       this.destinationPath(`src/${this.preferences.appHandle}-icons.html`),
       this.preferences
     );
-    this.fs.copyTpl(
-      this.templatePath('src/views/_some-sign-in.html'),
-      this.destinationPath(`src/views/${this.preferences.appHandle}-sign-in.html`),
-      this.preferences
-    );
   },
 
   install: function () {

@@ -86,14 +86,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               token-redirect-uri="[[ _getTokenRedirectUri() ]]"
               auth-host-url="[[ _authHostUrl ]]"
               api-host-url="[[ _apiHostUrl ]]"
-              default-profile-pic="/images/default-profile-pic.jpg"
-              after-sign-out-url="[[ _getSignInPage() ]]"
             ></ct-sign-in-button>
           </app-toolbar>
         </app-header>
 
         <iron-pages role="main" selected="[[ page ]]" attr-for-selected="name" selected-attribute="active" selected-item="{{ activeView }}">
-          <<%= appHandle %>-sign-in name="sign-in"></<%= appHandle %>-sign-in>
         </iron-pages>
 
         <paper-toast id="toast" drawer-opened$="[[ drawerOpened ]]"></paper-toast>
@@ -120,7 +117,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       get pages() {
         return [
-          CT.Page('sign-in', ''),
         ];
       },
 
