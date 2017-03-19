@@ -111,8 +111,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
 
       _configLoaded: function(appconfig) {
-        this._authHostUrl = appconfig.auth;
-        this._apiHostUrl = appconfig.api;
+        this._authHostUrl = appconfig.authHostUrl;
+        this._apiHostUrl = appconfig.apiHostUrl;
       },
 
       get pages() {

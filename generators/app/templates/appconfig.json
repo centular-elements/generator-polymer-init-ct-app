@@ -1,4 +1,4 @@
 {
-  "auth": "http://dev-auth.centular.com",
-  "api": "http://dev-api.centular.com"
+  "authHostUrl": "http://dev-auth.centular.com",
+  "apiHostUrl": "http://dev-api.centular.com"
 }
