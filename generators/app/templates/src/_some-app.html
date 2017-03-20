@@ -110,6 +110,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         '_configLoaded(_appconfig)'
       ],
 
+      ready: function() {
+        this._signedOut();
+      },
+
       _configLoaded: function(appconfig) {
         this._authHostUrl = appconfig.authHostUrl;
         this._apiHostUrl = appconfig.apiHostUrl;

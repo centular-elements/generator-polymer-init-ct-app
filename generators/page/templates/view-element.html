@@ -24,7 +24,10 @@
       behaviors: [CT.Behaviours.ApiConsumer],
 
       properties: {
-        refreshing: Boolean
+        refreshing: {
+          type: Boolean,
+          notify: true
+        }
       },
 
       refresh: function() {
