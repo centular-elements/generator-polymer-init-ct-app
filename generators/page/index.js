@@ -90,20 +90,17 @@ module.exports = yeoman.Base.extend({
     let endOfPages = appElement.indexOf('</iron-pages>', startOfPages);
     let appElementTopHalf = appElement.slice(0, endOfPages);
     let appElementBottomHalf = appElement.slice(endOfPages);
-
+    let pageElement = '';
     if (this.preferences.isRefreshable) {
-      let updatedAppElement = [
-        appElementTopHalf,
-        `  <${this.preferences.elementName} name="${this.preferences.pageName}" refreshing="{{ refreshing }}"></${this.preferences.elementName}>`,
-        '\n        ', appElementBottomHalf
-      ].join('');
+      pageElement = `  <${this.preferences.elementName} name="${this.preferences.pageName}" refreshing="{{ refreshing }}"></${this.preferences.elementName}>`;
     } else {
-      let updatedAppElement = [
-        appElementTopHalf,
-        `  <${this.preferences.elementName} name="${this.preferences.pageName}"></${this.preferences.elementName}>`,
-        '\n        ', appElementBottomHalf
-      ].join('');
+      pageElement = `  <${this.preferences.elementName} name="${this.preferences.pageName}"></${this.preferences.elementName}>`;
     }
+    let updatedAppElement = [
+      appElementTopHalf,
+      pageElement,
+      '\n        ', appElementBottomHalf
+    ].join('');
 
     // Add page config
     let menuItem = '';
