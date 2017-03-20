@@ -23,7 +23,14 @@
       is: '<%= elementName %>',
       behaviors: [CT.Behaviours.ApiConsumer],
 
-      // Element logic here
+      properties: {
+        refreshing: Boolean
+      },
+
+      refresh: function() {
+        this.refreshing = true;
+
+      }
 
     });
   </script>

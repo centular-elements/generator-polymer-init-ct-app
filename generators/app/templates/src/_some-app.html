@@ -82,7 +82,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 hidden
             ></paper-icon-button>
             <ct-sign-in-button
-              client-id="your client id here"
+              client-id=""
               token-redirect-uri="[[ _getTokenRedirectUri() ]]"
               auth-host-url="[[ _authHostUrl ]]"
               api-host-url="[[ _apiHostUrl ]]"
@@ -129,7 +129,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       get refreshablePages() {
-        return [];
+        return [
+        ];
+      },
+
+      get guestPages() {
+        return [
+        ];
       }
     });
 

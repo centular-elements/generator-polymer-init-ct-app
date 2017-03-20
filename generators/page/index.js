@@ -51,6 +51,17 @@ module.exports = yeoman.Base.extend({
       message: 'What would you like your menu item icon to be?',
       default: 'icons:folder',
       when: this._isMenuItem
+    },{
+      type: 'input',
+      name: 'isGuestVisible',
+      message: 'Should this page be visible to an unauthenticated guest user?',
+      default: false,
+      when: this._isMenuItem
+    },{
+      type: 'input',
+      name: 'isRefreshable',
+      message: 'Should this page be refreshable?',
+      default: true
     }];
 
     return this.prompt(prompts).then((answers) => this.preferences = answers);
@@ -79,11 +90,20 @@ module.exports = yeoman.Base.extend({
     let endOfPages = appElement.indexOf('</iron-pages>', startOfPages);
     let appElementTopHalf = appElement.slice(0, endOfPages);
     let appElementBottomHalf = appElement.slice(endOfPages);
-    let updatedAppElement = [
-      appElementTopHalf,
-      `  <${this.preferences.elementName} name="${this.preferences.pageName}"></${this.preferences.elementName}>`,
-      '\n        ', appElementBottomHalf
-    ].join('');
+
+    if (this.preferences.isRefreshable) {
+      let updatedAppElement = [
+        appElementTopHalf,
+        `  <${this.preferences.elementName} name="${this.preferences.pageName}" refreshing="{{ refreshing }}"></${this.preferences.elementName}>`,
+        '\n        ', appElementBottomHalf
+      ].join('');
+    } else {
+      let updatedAppElement = [
+        appElementTopHalf,
+        `  <${this.preferences.elementName} name="${this.preferences.pageName}"></${this.preferences.elementName}>`,
+        '\n        ', appElementBottomHalf
+      ].join('');
+    }
 
     // Add page config
     let menuItem = '';
@@ -99,6 +119,32 @@ module.exports = yeoman.Base.extend({
       `  CT.Page('${this.preferences.pageName}', '${this.preferences.pageTitle}'${menuItem}),`,
       '\n        ', appElementBottomHalf
     ].join('');
+
+    // Add refreshable page config
+    if (this.preferences.isRefreshable) {
+      startOfPages = updatedAppElement.indexOf('get refreshablePages()');
+      endOfPages = updatedAppElement.indexOf('];', startOfPages);
+      appElementTopHalf = updatedAppElement.slice(0, endOfPages);
+      appElementBottomHalf = updatedAppElement.slice(endOfPages);
+      updatedAppElement = [
+        appElementTopHalf,
+        `'${this.preferences.pageName}',`,
+        '\n        ', appElementBottomHalf
+      ].join('');
+    }
+
+    // Add guest visible page config
+    if (this.preferences.isGuestVisible) {
+      startOfPages = updatedAppElement.indexOf('get guestPages()');
+      endOfPages = updatedAppElement.indexOf('];', startOfPages);
+      appElementTopHalf = updatedAppElement.slice(0, endOfPages);
+      appElementBottomHalf = updatedAppElement.slice(endOfPages);
+      updatedAppElement = [
+        appElementTopHalf,
+        `'${this.preferences.pageName}',`,
+        '\n        ', appElementBottomHalf
+      ].join('');
+    }
 
     // Save the app element
     this.fs.write(appElementFile, updatedAppElement);
