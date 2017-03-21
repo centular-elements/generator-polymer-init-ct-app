@@ -20,7 +20,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 
 <link rel="import" href="<%= appHandle %>-icons.html">
 <link rel="import" href="../bower_components/ct-core-utils/ct-app-styles.html">
@@ -52,16 +55,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" opened="{{ drawerOpened }}" swipe-open>
         <app-toolbar>
           <!--<iron-icon src="/images/app-icon-128.png"></iron-icon>-->
-          <%= appShortTitle %>
+          Test
         </app-toolbar>
-        <iron-selector selected="[[ page ]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <template is="dom-repeat" items="[[ _computeMenuItems(signedIn) ]]">
-            <a name="[[ item.name ]]" href="[[ item.menuItem.href ]]" on-tap="_closeDrawer">
+
+        <!--<div class="layout horizontal menu-tools">
+        expand and collapse all tools
+          <paper-icon-button icon="icons:unfold-less"></paper-icon-button>
+          <paper-icon-button icon="icons:unfold-more"></paper-icon-button>
+        </div>-->
+
+        <template is="dom-repeat" items="[[ _computeMenuItems(signedIn) ]]" as="item">
+          <paper-item class="menu-item" tag="[[ item.name ]]" on-tap="_menuItemTapped">
+            <a href="[[ item.menuItem.href ]]" tabindex="-1" class="layout flex menu-link">
               <iron-icon icon="[[ item.menuItem.icon ]]"></iron-icon>
               <span>[[ item.menuItem.name ]]</span>
             </a>
+            <template is="dom-if" if="[[ _hasSubMenuItems(item.menuItem.name) ]]">
+              <paper-icon-button icon="icons:expand-more" tag="[[ item.name ]]"  on-tap="_collapseButtonTapped"></paper-icon-button>
+            </template>
+          </paper-item>
+          <template is="dom-if" if="[[ _hasSubMenuItems(item.menuItem.name) ]]">
+            <iron-collapse id="[[ _generateId('sub-menu', item.name) ]]" class="menu-item sub-menu-item">
+              <template is="dom-repeat" items="[[ _computeSubMenuItems(item.menuItem.name) ]]" >
+                <paper-item class="menu-item" tag="[[ item.name ]]" on-tap="_menuItemTapped">
+                  <a href="[[ item.menuItem.href ]]" tabindex="-1" class="layout flex menu-link">
+                    <iron-icon icon="[[ item.menuItem.icon ]]"></iron-icon>
+                    <span>[[ item.menuItem.name ]]</span>
+                  </a>
+                </paper-item>
+              </template>
+            </iron-collapse>
           </template>
-        </iron-selector>
+        </template>
       </app-drawer>
 
       <!-- Main content -->
