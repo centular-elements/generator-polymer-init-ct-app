@@ -59,6 +59,12 @@ module.exports = yeoman.Base.extend({
       when: this._isMenuItem
     },{
       type: 'input',
+      name: 'parentMenuItemName',
+      message: 'Add as sub-page to parent menu with name (leave null for top level page):',
+      default: null,
+      when: this._isMenuItem
+    },{
+      type: 'input',
       name: 'isRefreshable',
       message: 'Should this page be refreshable?',
       default: true
@@ -105,7 +111,11 @@ module.exports = yeoman.Base.extend({
     // Add page config
     let menuItem = '';
     if (this.preferences.hasMenuItem) {
-      menuItem = `, CT.PageMenuItem('${this.preferences.menuTitle}', '/${this.preferences.pageName}', '${this.preferences.menuIcon}')`;
+      if (this.preferences.parentMenuItemName) {
+        menuItem = `, CT.PageMenuItem('${this.preferences.menuTitle}', '/${this.preferences.pageName}', '${this.preferences.menuIcon}', '${this.preferences.parentMenuItemName}')`;
+      } else {
+        menuItem = `, CT.PageMenuItem('${this.preferences.menuTitle}', '/${this.preferences.pageName}', '${this.preferences.menuIcon}')`;
+      }
     }
     startOfPages = updatedAppElement.indexOf('get pages()');
     endOfPages = updatedAppElement.indexOf('];', startOfPages);
