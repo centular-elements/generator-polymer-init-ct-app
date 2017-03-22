@@ -202,7 +202,7 @@ module.exports = yeoman.Base.extend({
   },
 
   _isTopLevelPage: function(answers) {
-    return this._isMenuItem(answers) && !this._isSubPage(answers);
+    return answers.hasMenuItem && !answers.isSubPage;
   }
 
 });
