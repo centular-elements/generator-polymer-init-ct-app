@@ -33,9 +33,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="<%= appName %>">
 
   <template>
-    <style include="ct-app-styles">
+    <style include="ct-app-styles iron-flex iron-flex-alignment">
       :host {
         display: block;
+      }
+      .menu-link {
+        background-color: inherit;
+        color: inherit;
+        outline: none;
       }
     </style>
 

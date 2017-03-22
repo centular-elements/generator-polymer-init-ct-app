@@ -52,19 +52,24 @@ module.exports = yeoman.Base.extend({
       default: 'icons:folder',
       when: this._isMenuItem
     },{
-      type: 'input',
-      name: 'isGuestVisible',
-      message: 'Should this page be visible to an unauthenticated guest user?',
+      type: 'confirm',
+      name: 'isSubPage',
+      message: 'Is this a sub page?',
       default: false,
       when: this._isMenuItem
     },{
       type: 'input',
       name: 'parentMenuItemName',
-      message: 'Add as sub-page to parent menu with name (leave null for top level page):',
-      default: null,
-      when: this._isMenuItem
+      message: 'Parent menu item name:',
+      when: this._isSubPage
     },{
-      type: 'input',
+      type: 'confirm',
+      name: 'isGuestVisible',
+      message: 'Should this page be visible to an unauthenticated guest user?',
+      default: false,
+      when: this._isMenuItem && !this._isSubPage
+    },{
+      type: 'confirm',
       name: 'isRefreshable',
       message: 'Should this page be refreshable?',
       default: true
@@ -190,6 +195,10 @@ module.exports = yeoman.Base.extend({
 
   _isMenuItem: function(answers) {
     return answers.hasMenuItem;
+  },
+
+  _isSubPage: function(answers) {
+    return answers.isSubPage;
   }
 
 });
