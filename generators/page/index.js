@@ -67,7 +67,7 @@ module.exports = yeoman.Base.extend({
       name: 'isGuestVisible',
       message: 'Should this page be visible to an unauthenticated guest user?',
       default: false,
-      when: this._isMenuItem && !this._isSubPage
+      when: this._isTopLevelPage
     },{
       type: 'confirm',
       name: 'isRefreshable',
@@ -199,6 +199,10 @@ module.exports = yeoman.Base.extend({
 
   _isSubPage: function(answers) {
     return answers.isSubPage;
+  },
+
+  _isTopLevelPage: function(answers) {
+    return this._isMenuItem(answers) && !this._isSubPage(answers);
   }
 
 });
