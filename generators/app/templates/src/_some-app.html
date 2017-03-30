@@ -129,7 +129,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </app-toolbar>
         </app-header>
 
-        <iron-pages role="main" selected="[[ page ]]" attr-for-selected="name" selected-attribute="active" selected-item="{{ activeView }}">
+        <iron-pages id="ironPages" role="main" selected="[[ page ]]" attr-for-selected="name" selected-attribute="active" selected-item="{{ activeView }}">
         </iron-pages>
 
         <paper-toast id="toast" drawer-opened$="[[ drawerOpened ]]"></paper-toast>
