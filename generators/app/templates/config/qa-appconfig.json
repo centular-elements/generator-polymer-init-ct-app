@@ -1,4 +1,5 @@
 {
+  "clientId": "",
   "auth": "http://qa-auth.centular.com",
   "api": "http://qa-api.centular.com"
 }

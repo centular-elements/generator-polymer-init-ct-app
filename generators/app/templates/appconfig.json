@@ -1,4 +1,5 @@
 {
+  "clientId": "",
   "authHostUrl": "http://dev-auth.centular.com",
   "apiHostUrl": "http://dev-api.centular.com"
 }

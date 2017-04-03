@@ -121,7 +121,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 hidden
             ></paper-icon-button>
             <ct-sign-in-button
-              client-id=""
+              client-id="[[ _clientId ]]"
               token-redirect-uri="[[ _getTokenRedirectUri() ]]"
               auth-host-url="[[ _authHostUrl ]]"
               api-host-url="[[ _apiHostUrl ]]"
@@ -154,6 +154,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _configLoaded: function(appconfig) {
+        this._clientId = appconfig.clientId;
         this._authHostUrl = appconfig.authHostUrl;
         this._apiHostUrl = appconfig.apiHostUrl;
       },
