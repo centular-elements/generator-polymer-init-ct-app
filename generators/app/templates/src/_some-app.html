@@ -33,6 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="<%= appHandle %>-icons.html">
 <link rel="import" href="../bower_components/ct-core-utils/ct-app-styles.html">
 <link rel="import" href="../bower_components/ct-app-behaviour/ct-app-behaviour.html">
+<link rel="import" href="../bower_components/ct-toast-behavior/ct-toast-behavior.html">
 <link rel="import" href="../bower_components/ct-sign-in-button/ct-sign-in-button.html">
 
 <dom-module id="<%= appName %>">
@@ -132,7 +133,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <iron-pages id="ironPages" role="main" selected="[[ page ]]" attr-for-selected="name" selected-attribute="active" selected-item="{{ activeView }}">
         </iron-pages>
 
-        <paper-toast id="toast" drawer-opened$="[[ drawerOpened ]]"></paper-toast>
+        <paper-toast id="toast" always-on-top vertical-align="top" vertical-offset="65" drawer-opened$="[[ drawerOpened ]]">
+          <paper-button></paper-button>
+        </paper-toast>
 
       </app-header-layout>
 
@@ -143,7 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     Polymer({
       is: '<%= appName %>',
-      behaviors: [CT.Behaviours.App],
+      behaviors: [CT.Behaviours.App, CT.Behaviours.Toast],
 
       observers: [
         '_configLoaded(_appconfig)'
