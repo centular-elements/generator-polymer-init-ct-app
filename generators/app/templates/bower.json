@@ -16,6 +16,7 @@
     "iron-selector": "PolymerElements/iron-selector#^1.5.2",
     "ct-app-behaviour": "git://github.com/centular-elements/ct-app-behaviour",
     "ct-toast-behavior": "git://github.com/centular-elements/ct-toast-behavior",
+    "ct-shared-styles": "git://github.com/Centular/shared-styles.git",
     "ct-core-utils": "git://github.com/centular-elements/ct-core-utils",
     "ct-sign-in-button": "git://github.com/centular-elements/ct-sign-in-button",
     "paper-toast": "^1.3.0",
